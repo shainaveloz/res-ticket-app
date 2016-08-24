@@ -1,10 +1,11 @@
 var express = require('express');
-var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
+var connection = require('./config/connection.js');
 var path = require('path');
 var passport = require('passport');
 var session  = require('express-session');
 var cookieParser = require('cookie-parser');
+var app = express();
 
 app.use(express.static(__dirname + '/public'));
 
