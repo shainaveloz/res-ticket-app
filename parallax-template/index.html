@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="ticketApp">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
@@ -40,7 +40,7 @@
 
       </div>
     </div>
-    <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 1"></div>
+    <div class="parallax"><img src="res-1.jpg" alt="Unsplashed background img 1"></div>
   </div>
 
 
@@ -54,7 +54,7 @@
             <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
             <h5 class="center">Speeds up development</h5>
 
-            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+            <p class="light">This app was created to get the restaurant ticketing system out of the Stone Age and into the Modern Age. No more lost tickets, printer jams, or high ticket times!</p>
           </div>
         </div>
 
@@ -157,6 +157,11 @@
 
   <!--  Scripts-->
 
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="js/angular-ui-router.min.js"></script>
+  <script>
+    var ticketApp = angular.module('ticketApp', ['ui.router']);
+  </script>
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>

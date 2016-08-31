@@ -5,6 +5,8 @@ var path = require('path');
 var passport = require('passport');
 var session  = require('express-session');
 var cookieParser = require('cookie-parser');
+var flash = require('flash');
+var ticketApp = require ()
 var app = express();
 
 app.use(express.static(__dirname + '/public'));
@@ -24,6 +26,8 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
 } ));
+
+app.use(flash());
 
 // use passport authentication middleware
 app.use(passport.initialize());

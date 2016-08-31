@@ -20,6 +20,18 @@ connection.connect(function(err) {
     console.log('connected as id ' + connection.threadId);
 });
 
+// angular.
+// module('/').
+// config(['$locationProvider', '$routeProvider',
+//     function config($locationProvider, $routeProvider) {
+//         $locationProvider.hashPrefix('!');
+//
+//         $routeProvider.
+//         when('/', {
+//             template: ''
+//         }).
+//     }
+// ]);
 
 var GOOGLE_CLIENT_ID = '932569619900-24714d0s0kddfcs5hebhnl6tj2qv87rc.apps.googleusercontent.com';
 var GOOGLE_CLIENT_SECRET = '0A8iooj3l2wMKx3Iv__NvYVv';
@@ -72,15 +84,18 @@ passport.deserializeUser(function(user, done){
     done(null, user);
 });
 
-app.get('/auth/google',
-    passport.authenticate('google', { scope: 'https://www.google.com/m8/feeds' }));
+module.exports = function(app){
 
-app.get('/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: '/login' }),
-    function(req, res) {
-        res.redirect('/');
-    });
+    app.get('/auth/google',
+        passport.authenticate('google', { scope: 'https://www.google.com/m8/feeds' }));
 
+    app.get('/auth/google/callback',
+        passport.authenticate('google', { failureRedirect: '/login' }),
+        function(req, res) {
+            res.redirect('/');
+        });
+
+};
 
 
 module.exports = connection;
