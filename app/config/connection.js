@@ -1,6 +1,4 @@
 var passport = require('passport');
-var methodOverride = require('method-override');
-var bodyParser = require('body-parser');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 var mysql = require('mysql');
