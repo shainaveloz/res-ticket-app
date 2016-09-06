@@ -1,0 +1,25 @@
+{
+  "name": "res-ticket-app",
+  "version": "1.0.0",
+  "description": "An application made to bring restaurant ticketing systems into the modern era.",
+  "main": "app.js",
+  "dependencies": {
+    "express-session": "^1.14.0",
+    "flash": "^1.1.0",
+    "mysql": "^2.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shainaveloz/res-ticket-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shainaveloz/res-ticket-app/issues"
+  },
+  "homepage": "https://github.com/shainaveloz/res-ticket-app#readme"
+}

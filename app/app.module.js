@@ -15,6 +15,7 @@
             .when('/fry',{ templateUrl: 'views/fry.html', title: 'fry'})
             .when('/pantry',{ templateUrl: 'views/pantry.html', title: 'pantry'})
             .when('/prep',{ templateUrl: 'views/prep.html', title: 'prep'})
+            .when('/servers',{ templateUrl: 'views/servers.html', title: 'servers'})
             .otherwise({ redirectTo: '/' });
     }
 })();
