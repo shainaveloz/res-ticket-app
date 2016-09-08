@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="ticketApp">
+<html lang="en" ng-app="app">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
@@ -15,11 +15,11 @@
     <div class="nav-wrapper container">
       <a id="logo-container" href="#" class="brand-logo">Logo</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
+        <li><a ng-src="./directives/user-profile.directives.html">Log In</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Navbar Link</a></li>
+        <li><a ng-src="./directives/user-profile.directive.html">Log In</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
@@ -151,9 +151,10 @@
 
   <!--  Scripts-->
 
+    <ng-view></ng-view>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
   <script src="bower_components/angular-ui-router.min.js"></script>
-  <script>var ticketApp = angular.module('ticketApp', ['ui.router']);</script>
+  <script src="app.js"></script>
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>

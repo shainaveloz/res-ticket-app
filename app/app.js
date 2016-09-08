@@ -1,16 +1,18 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var module = require('./app.module.js');
+var routes = require('./app.routes.js');
+var config = require('./app.config.js');
 var connection = require('./config/connection.js');
 var path = require('path');
 var passport = require('passport');
 var session  = require('express-session');
 var cookieParser = require('cookie-parser');
 var flash = require('flash');
-// var ticketApp = require ();
 var app = express();
 
 app.use(express.static(__dirname + '/views'));
-app.use(express.static(__dirname + '/bower_components'));
+app.use(express.static(__dirname + './bower_components'));
 
 // BodyParser interprets data sent to the server
 app.use(bodyParser.json());
