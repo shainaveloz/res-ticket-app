@@ -11,8 +11,8 @@ var cookieParser = require('cookie-parser');
 var flash = require('flash');
 var app = express();
 
-app.use(express.static(__dirname + '/views'));
-app.use(express.static(__dirname + './bower_components'));
+app.use(express.static(__dirname + './views'));
+app.use(express.static(__dirname + '/bower_components'));
 
 // BodyParser interprets data sent to the server
 app.use(bodyParser.json());
