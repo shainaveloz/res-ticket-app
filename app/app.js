@@ -9,10 +9,11 @@ var passport = require('passport');
 var session  = require('express-session');
 var cookieParser = require('cookie-parser');
 var flash = require('flash');
+//var ticketApp = require('./bower_components/angular/index.js');
 var app = express();
 
 app.use(express.static(__dirname + './views'));
-app.use(express.static(__dirname + '/bower_components'));
+app.use(express.static(__dirname + './bower_components'));
 
 // BodyParser interprets data sent to the server
 app.use(bodyParser.json());
@@ -35,11 +36,6 @@ app.use(flash());
 // use passport authentication middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-// app.get('/', function(req, res){
-//     res.send('index.html');
-// });
 
 app.get('/auth/google',
     passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
