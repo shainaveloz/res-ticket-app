@@ -1,18 +1,15 @@
 // constants.js
 
-/* global toastr:false, moment:false */
+
 (function() {
     'use strict';
 
     angular
         .module('ticketApp')
         .constant('toastr', toastr)
-        .constant('moment', moment);
+        .constant('moment', moment)
         .constant('CONST', {
-            inputButtonData: {
-
-                ['cheeseButton': 'American', 'Swiss', 'Provolone', 'Cheddar'],
-                ['cookButton': 'Rare', 'Medium Rare', 'Medium', 'Medium Well', 'Well Done'],
+            inputButtonData:
                 'burgerButton': 'Burger',
                 'shepardButton': 'Shepards Pie',
                 'friesButton': 'Fries',

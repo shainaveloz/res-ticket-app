@@ -1,10 +1,10 @@
+'use strict';
 var express = require('express');
 var bodyParser = require('body-parser');
 var module = require('./app.module.js');
 var routes = require('./app.routes.js');
 var config = require('./app.config.js');
 var connection = require('./config/connection.js');
-var path = require('path');
 var passport = require('passport');
 var session  = require('express-session');
 var cookieParser = require('cookie-parser');
