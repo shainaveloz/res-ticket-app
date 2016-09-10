@@ -7,7 +7,7 @@
 
     routeConfig.$inject = ['$routeProvider'];
 
-    function routeConfig($routeProvider) {
+        function routeConfig($routeProvider) {
         $routeProvider
             .when('/',{ templateUrl: './views/index.html', title: 'index'})
             .when('/chefs',{ templateUrl: './views/chefs.html', title: 'chef', controller: 'controllers/chefs.js'})
