@@ -66,7 +66,7 @@ SET GLOBAL event_scheduler = ON;
 CREATE EVENT order_reset
   ON SCHEDULE
     EVERY 1 DAY
-    STARTS ('00:00:00' + INTERVAL 1 DAY)
+    STARTS CURRENT_TIMESTAMP 
 COMMENT 'Calls timer procedure to delete stored orders every day'
   DO
 	CALL timer();
