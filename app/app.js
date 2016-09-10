@@ -1,10 +1,10 @@
-'use strict';
 var express = require('express');
 var bodyParser = require('body-parser');
-var module = require('./app.module.js');
-var routes = require('./app.routes.js');
-var config = require('./app.config.js');
+var module = require('./public/js/app.module.js');
+var routes = require('./public/js/app.routes.js');
+var config = require('./public/js/app.config.js');
 var connection = require('./config/connection.js');
+var path = require('path');
 var passport = require('passport');
 var session  = require('express-session');
 var cookieParser = require('cookie-parser');
@@ -12,7 +12,8 @@ var flash = require('flash');
 var app = express();
 
 app.use(express.static(__dirname + './views'));
-app.use(express.static(__dirname + './bower_components'));
+app.use(express.static(__dirname + '/bower_components'));
+app.use(express.static(__dirname + '/public'));
 
 // BodyParser interprets data sent to the server
 app.use(bodyParser.json());
@@ -35,6 +36,12 @@ app.use(flash());
 // use passport authentication middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+app.get('/', function(req,res){
+    res.sendFile(path.join(__dirname, './views', 'mainIndex.html'));
+});
+
 
 app.get('/auth/google',
     passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));

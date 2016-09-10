@@ -12,6 +12,7 @@
     "mysql": "^2.11.1",
     "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
+    "path": "^0.12.7",
     "require": "^2.4.20",
     "toastr": "^2.1.2"
   },
