@@ -9,7 +9,6 @@ var passport = require('passport');
 var session  = require('express-session');
 var cookieParser = require('cookie-parser');
 var flash = require('flash');
-//var ticketApp = require('./bower_components/angular/index.js');
 var app = express();
 
 app.use(express.static(__dirname + './views'));

@@ -33,19 +33,6 @@ passport.use(new GoogleStrategy({
     }
 ));
 
-// passport.use(new LocalStrategy({passReqToCallback:true}, function(req, username, password, done){
-//     orm.findUser(username, function(err, user){
-//         user = user[0];
-//         if (err){
-//             return done(err)
-//         }
-//         if (!user){
-//             return done(null, false)
-//         }
-//         return done(null, user);
-//     });
-// }));
-
 passport.use(new LocalStrategy(
     function(username, password, done) {
         User.findOne({ username: username }, function (err, user) {
