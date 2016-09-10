@@ -36,7 +36,7 @@
                 })
                 .state('login', {
                     url: "/login",
-                    templateUrl: "../directives/user-profile.directive.html"
+                    templateUrl: "../views/user-profile.directive.html"
 
                 });
         });
