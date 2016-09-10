@@ -1,22 +1,56 @@
-angular
-    .module('app')
-    .config(configure);
+(function () {
+    'use strict';
 
-configure.$inject =
-    ['routerHelperProvider', 'exceptionHandlerProvider', 'toastr'];
-
-function configure (routerHelperProvider, exceptionHandlerProvider, toastr) {
-    exceptionHandlerProvider.configure(config.appErrorPrefix);
-    configureStateHelper();
-
-    toastr.options.timeOut = 4000;
-    toastr.options.positionClass = 'toast-bottom-right';
-
-    ////////////////
-
-    function configureStateHelper() {
-        routerHelperProvider.configure({
-            docTitle: 'NG-Modular: '
+    angular
+        .config(function ($stateProvider) {
+            $stateProvider
+                .state('index', {
+                    url: "",
+                    views: {
+                        "viewA": {template: "index.html"}
+                    }
+                })
+                .state('chef', {
+                    url: "/chefs",
+                    views: {
+                        "viewA": {template: "chefs.html"}
+                    }
+                })
+                .state('expo', {
+                    url: "/expo",
+                    views: {
+                        "viewA": {template: "expo.html"}
+                    }
+                })
+                .state('fry', {
+                    url: "/fry",
+                    views: {
+                        "viewA": {template: "fry.html"}
+                    }
+                })
+                .state('pantry', {
+                    url: "/pantry",
+                    views: {
+                        "viewA": {template: "pantry.html"}
+                    }
+                })
+                .state('server', {
+                    url: "/server",
+                    views: {
+                        "viewA": {template: "server.html"}
+                    }
+                })
+                .state('prep', {
+                    url: "/prep",
+                    views: {
+                        "viewA": {template: "prep.html"}
+                    }
+                })
+                .state('login', {
+                    url: "/login",
+                    views: {
+                        "viewA": {template: "user-profile.directive.html"}
+                    }
+                })
         });
-    }
-}
+});

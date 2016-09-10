@@ -10,6 +10,9 @@
         .constant('moment', moment);
         .constant('CONST', {
             inputButtonData: {
+
+                ['cheeseButton': 'American', 'Swiss', 'Provolone', 'Cheddar'],
+                ['cookButton': 'Rare', 'Medium Rare', 'Medium', 'Medium Well', 'Well Done'],
                 'burgerButton': 'Burger',
                 'shepardButton': 'Shepards Pie',
                 'friesButton': 'Fries',
