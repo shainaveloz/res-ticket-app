@@ -31,11 +31,6 @@
             <br><br>
             <h1 class="header center teal-text text-lighten-2">Hello Chef!</h1>
 
-            <div class="row center">
-                <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
-            </div>
-            <br><br>
-
         </div>
     </div>
     <div class="parallax"><img src="res-1.jpg" alt="Unsplashed background img 1"></div>
@@ -50,8 +45,6 @@
             <div class="row">
                 <div class="col s12 center">
                     <h3><i class="mdi-content-send brown-text"></i></h3>
-                    <h4></h4>
-                    <button></button>
                 </div>
             </div>
 
@@ -62,6 +55,7 @@
                     <h2 class="center brown-text"><i class="material-icons">note</i></h2>
                     <h5 class="center">Orders In</h5>
                 </div>
+                <button ng-repeat="buttons"></button>
             </div>
 
             <div class="col s12 m4">
@@ -104,9 +98,9 @@
 
 <ui-view></ui-view>
 
-<script src="../bower_components/angular/angular.js"></script>
-<script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="../index.js"></script>
+<script src="./bower_components/angular/angular.js"></script>
+<script src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="./index.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/materialize.js"></script>
 <script src="js/init.js"></script>
