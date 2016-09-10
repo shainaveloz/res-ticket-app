@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="ticketApp">
+<html lang="en" data-ng-app="ticketApp">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
@@ -133,12 +133,12 @@
   <!--  Scripts-->
   <ui-view></ui-view>
 
-  <script src="../bower_components/angular/angular.js"></script>
-  <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-  <script src="../index.js"></script>
+  <script src="./bower_components/angular/angular.js"></script>
+  <script src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="./index.js"></script>
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
 
-  </body>
+  </body ui-view>
 </html>
