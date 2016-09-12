@@ -1,10 +1,10 @@
-'use strict';
-
-(function () {
-
-    angular
-        .module("ticketApp", ["ui.router"])
-});
+// 'use strict';
+//
+// (function () {
+//
+//     angular
+//         .module("ticketApp", ["ui.router"])
+// });
 
 
 // (function () {

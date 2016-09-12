@@ -2,6 +2,7 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 var mysql = require('mysql');
+var secret = ('./app-secret.js');
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -18,20 +19,31 @@ connection.connect(function(err) {
     console.log('connected as id ' + connection.threadId);
 });
 
-var GOOGLE_CLIENT_ID = '932569619900-24714d0s0kddfcs5hebhnl6tj2qv87rc.apps.googleusercontent.com';
-var GOOGLE_CLIENT_SECRET = '0A8iooj3l2wMKx3Iv__NvYVv';
-
 passport.use(new GoogleStrategy({
-        clientID: GOOGLE_CLIENT_ID,
-        clientSecret: GOOGLE_CLIENT_SECRET, //AIzaSyBgZ7Ra5SBtsS6Drqa1IEY7SGYycmnpj0M (key)
-        callbackURL: "http://localhost:3000/auth/google/callback"
+        clientID: secret,
+        clientSecret: secret,
+        callbackURL: "http://localhost:8080/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, done) {
         User.findOrCreate({ googleId: profile.id }, function (err, user) {
             return done(err, user);
         });
-    }
-));
+}));
+
+gapi.load('auth2', function() {
+    auth2 = gapi.auth2.init({
+        client_id: 'CLIENT_ID.apps.googleusercontent.com',
+        fetch_basic_profile: false,
+        scope: 'profile'
+    });
+
+    // Sign the user in, and then retrieve their ID.
+    auth2.signIn().then(function() {
+        console.log(auth2.currentUser.get().getId());
+    });
+});
+
+
 
 passport.use(new LocalStrategy(
     function(username, password, done) {
@@ -56,18 +68,29 @@ passport.deserializeUser(function(user, done){
     done(null, user);
 });
 
+
+// var GOOGLE_CLIENT_ID = '932569619900-24714d0s0kddfcs5hebhnl6tj2qv87rc.apps.googleusercontent.com';
+// var GOOGLE_CLIENT_SECRET = '0A8iooj3l2wMKx3Iv__NvYVv';
+
+
+
+
 module.exports = function(app){
 
     app.get('/auth/google',
-        passport.authenticate('google', { scope: 'https://www.google.com/m8/feeds' }));
+        passport.authenticate('google', { scope: ['user:email'] }));
 
     app.get('/auth/google/callback',
         passport.authenticate('google', { failureRedirect: '/login' }),
         function(req, res) {
             res.redirect('/');
         });
+    app.post('/login',
+        passport.authenticate('local', { successRedirect: '/',
+            failureRedirect: '/login',
+            failureFlash: true })
+    );
 
 };
-
 
 module.exports = connection;

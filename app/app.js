@@ -4,6 +4,7 @@ var module = require('./public/js/app.module.js');
 var routes = require('./public/js/app.routes.js');
 var config = require('./public/js/app.config.js');
 var connection = require('./config/connection.js');
+var secret = require('./app-secret.js');
 var path = require('path');
 var passport = require('passport');
 var session  = require('express-session');
@@ -44,14 +45,36 @@ app.get('/', function(req,res){
     res.sendFile(path.join(__dirname, './views', 'mainIndex.html'));
 });
 
+app.get('/login', function(req,res){
+    req.login(user, function(err) {
+        if (err) { return next(err); }
+        return res.redirect('/users/' + req.user.username);
+    });
+});
+
 app.get('/auth/google',
-    passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+    passport.authenticate('google', { scope: ['user:email'] }));
 
 app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
     function(req, res) {
+        req.login(user, function(err) {
+            if (err) { return next(err); }
+            return res.redirect('/users/' + req.user.username);
+        });
         res.redirect('/');
     });
+
+app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+});
+
+app.post('/login',
+    passport.authenticate('local', { successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true })
+);
 
 var PORT = process.env.PORT || 8080;
 

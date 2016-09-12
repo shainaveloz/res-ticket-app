@@ -36,8 +36,21 @@
                 })
                 .state('login', {
                     url: "/login",
-                    templateUrl: "../views/user-profile.directive.html"
-
+                    templateUrl: "../views/login.html",
+                    controller: function($scope){
+                        $scope.UserService();
+                    }
+                })
+                .state('auth', {
+                url: "/auth/google",
+                templateUrl: "http://localhost:8080/auth/google/callback"
+                 })
+                .state('logout', {
+                    url:"/logout",
+                    templateUrl:"../views/login.html",
+                    controller: function($scope){
+                        $scope.UserService();
+                    }
                 });
         });
 })();

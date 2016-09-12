@@ -9,24 +9,46 @@
         .constant('toastr', toastr)
         .constant('moment', moment)
         .constant('CONST', {
-            inputButtonData:
+            inputEntreeData:{
                 'burgerButton': 'Burger',
                 'shepardButton': 'Shepards Pie',
-                'friesButton': 'Fries',
+                'chickSanButton': 'Chicken Sandwich'
+        })
+        .constant('CONST', {
+            inputCheeseData:{
                 'cheddarButton': 'Cheddar',
                 'americanButton': 'American',
                 'swissButton': 'Swiss',
-                'provoloneButton': 'Provolone',
+                'provoloneButton': 'Provolone'
+            }
+        })
+        .constant('CONST', {
+            inputCookData:{
                 'rareButton': 'Rare',
                 'medRareButton': 'Medium Rare',
                 'mediumButton': 'Medium',
                 'medWellButton': 'Medium Well',
-                'wellButton': 'Well Done',
+                'wellButton': 'Well Done'
+            }
+        })
+        .constant('CONST', {
+            inputAppData:{
                 'wingsButton': 'Wings',
+                'friesButton': 'Fries'
+            }
+        })
+        .constant('CONST', {
+            inputSaladData:{
                 'chickSaladButton': 'Chicken Salad',
-                'houseSaladButton': 'House Salad',
+                'houseSaladButton': 'House Salad'
+            }
+        })
+        .constant('CONST', {
+            inputDessertData:{
                 'iceCreamButton': 'Ice cream',
-                'brownieButton': 'Brownie',
-                'chickSanButton': 'Chicken Sandwich'
-    });
+                'brownieButton': 'Brownie'
+            }
+        })
+
+})
 })();
