@@ -19,9 +19,13 @@ connection.connect(function(err) {
     console.log('connected as id ' + connection.threadId);
 });
 
+
+var GOOGLE_CLIENT_ID = '932569619900-24714d0s0kddfcs5hebhnl6tj2qv87rc.apps.googleusercontent.com';
+var GOOGLE_CLIENT_SECRET = '0A8iooj3l2wMKx3Iv__NvYVv';
+
 passport.use(new GoogleStrategy({
-        clientID: secret,
-        clientSecret: secret,
+        clientID: GOOGLE_CLIENT_ID,
+        clientSecret: GOOGLE_CLIENT_SECRET,
         callbackURL: "http://localhost:8080/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, done) {
@@ -30,9 +34,9 @@ passport.use(new GoogleStrategy({
         });
 }));
 
-gapi.load('auth2', function() {
+var gapi = gapi.load('auth2', function() {
     auth2 = gapi.auth2.init({
-        client_id: 'CLIENT_ID.apps.googleusercontent.com',
+        client_id: 'GOOGLE_CLIENT_ID.apps.googleusercontent.com',
         fetch_basic_profile: false,
         scope: 'profile'
     });
@@ -69,16 +73,10 @@ passport.deserializeUser(function(user, done){
 });
 
 
-// var GOOGLE_CLIENT_ID = '932569619900-24714d0s0kddfcs5hebhnl6tj2qv87rc.apps.googleusercontent.com';
-// var GOOGLE_CLIENT_SECRET = '0A8iooj3l2wMKx3Iv__NvYVv';
-
-
-
-
 module.exports = function(app){
 
     app.get('/auth/google',
-        passport.authenticate('google', { scope: ['user:email'] }));
+        passport.authenticate('google', { scope: ['profile'] }));
 
     app.get('/auth/google/callback',
         passport.authenticate('google', { failureRedirect: '/login' }),

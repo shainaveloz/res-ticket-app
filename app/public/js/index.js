@@ -47,7 +47,7 @@
                  })
                 .state('logout', {
                     url:"/logout",
-                    templateUrl:"../views/login.html",
+                    templateUrl:"../views/mainIndex.html",
                     controller: function($scope){
                         $scope.UserService();
                     }
