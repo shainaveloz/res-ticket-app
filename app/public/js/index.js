@@ -28,7 +28,10 @@
                 })
                 .state('server', {
                     url: "/server",
-                    templateUrl: "../views/server.html"
+                    templateUrl: "../views/server.html",
+                    controller: function($scope){
+                        $scope.buttonData = button;
+                    }
                 })
                 .state('prep', {
                     url: "/prep",
@@ -47,10 +50,7 @@
                  })
                 .state('logout', {
                     url:"/logout",
-                    templateUrl:"../views/mainIndex.html",
-                    controller: function($scope){
-                        $scope.UserService();
-                    }
+                    templateUrl:"../views/mainIndex.html"
                 });
         });
 })();

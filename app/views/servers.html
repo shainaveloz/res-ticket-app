@@ -57,31 +57,31 @@
         <div class="col l3 s12">
             <h5 class="white-text">Drinks</h5>
             <ul>
-                <li><a class="white-text" ng-repeat="button">Drinks</a></li>
+                <li><button class="white-text" ng-controller="buttonData" ng-repeat="button">Drinks</button></li>
             </ul>
         </div>
         <div class="col l3 s12">
             <h5 class="white-text">Entrees</h5>
             <ul>
-                <li><a class="white-text" ng-repeat="button">Entrees</a></li>
+                <li><button class="white-text" ng-controller="buttonData" >Entrees</button>{{inputEntree}}</li>
             </ul>
         </div>
         <div class="col l3 s12">
             <h5 class="white-text">Appetizers</h5>
             <ul>
-                <li><a class="white-text" ng-repeat="button">Appetizers</a></li>
+                <li><button class="white-text" ng-repeat="button">Appetizers</button></li>
             </ul>
         </div>
         <div class="col l3 s12">
             <h5 class="white-text">Desserts</h5>
             <ul>
-                <li><a class="white-text" ng-repeat="button">Desserts</a></li>
+                <li><button class="white-text" ng-repeat="button">Desserts</button></li>
             </ul>
         </div>
         <div class="col l3 s12">
             <h5 class="white-text">Orders In</h5>
             <ul>
-                <li><a class="white-text" ng-repeat="button">Orders In</a></li>
+                <li><button class="white-text" ng-repeat="button">Orders In</button></li>
             </ul>
         </div>
 
@@ -91,7 +91,6 @@
                 <h2 class="center brown-text"><i class="material-icons">note</i></h2>
                 <h5 class="center">Orders In</h5>
             </div>
-            <button ng-repeat="buttons"></button>
         </div>
 
         <div class="col s12 m4">

@@ -46,6 +46,7 @@ app.get('/', function(req,res){
 });
 
 app.get('/login', function(req,res){
+    res.sendFile(path.join(__dirname,'./views', 'login.html'));
     req.login(user, function(err) {
         if (err) { return next(err); }
         return res.redirect('/users/' + req.user.username);
