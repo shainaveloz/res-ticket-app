@@ -3,55 +3,16 @@
 //
 //     angular
 //         .module('ticketApp')
-//         .config(function ($stateProvider) {
-//             $stateProvider
-//                 .state('index', {
-//                     url: "/",
-//                     views: {
-//                         "viewA": {template: "./index.html"}
-//                     }
-//                 })
-//                 .state('chef', {
-//                     url: "/chefs",
-//                     views: {
-//                         "viewA": {template: "./chefs.html"}
-//                     }
-//                 })
-//                 .state('expo', {
-//                     url: "/expo",
-//                     views: {
-//                         "viewA": {template: "./expo.html"}
-//                     }
-//                 })
-//                 .state('fry', {
-//                     url: "/fry",
-//                     views: {
-//                         "viewA": {template: "./fry.html"}
-//                     }
-//                 })
-//                 .state('pantry', {
-//                     url: "/pantry",
-//                     views: {
-//                         "viewA": {template: "./pantry.html"}
-//                     }
-//                 })
-//                 .state('server', {
-//                     url: "/server",
-//                     views: {
-//                         "viewA": {template: "./server.html"}
-//                     }
-//                 })
-//                 .state('prep', {
-//                     url: "/prep",
-//                     views: {
-//                         "viewA": {template: "./prep.html"}
-//                     }
-//                 })
-//                 .state('login', {
-//                     url: "/login",
-//                     views: {
-//                         "viewA": {template: "./user-profile.directive.html"}
-//                     }
-//                 })
-//         });
+//         .config('orm',[''],function ($scope, $http) {
+//
+//
+//             viewAll: function(table) {
+//                 return new Promise(function(resolve, reject) {
+//                     //may need to do A.ID instead of A.Key format, 'SELECT * FROM ' + table + ' A LEFT JOIN skills B ON A.ID = B.ID'
+//                     var queryString = 'SELECT * FROM ' + table + ' A LEFT JOIN scores B ON A.id = B.id';
+//                     connection.query(queryString, function(err, result) {
+//                         resolve(result);
+//                     });
+//                 });
+//             }
 // });

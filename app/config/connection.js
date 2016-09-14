@@ -1,6 +1,7 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var LocalStrategy = require('passport-local').Strategy;
+var orm = require('./orm.js');
 var mysql = require('mysql');
 var secret = ('./app-secret.js');
 
@@ -81,6 +82,10 @@ passport.use(new GoogleStrategy({
 //
 // passport.use(new LocalStrategy(
 //     function(username, password, done) {
+//         function User(userObj) {
+//             this.username = userObj.username
+//             this.password = bcrypt.hashSync(userObj.password, null, null)
+//         }
 //         User.findOne({ username: username }, function (err, user) {
 //             if (err) { return done(err); }
 //             if (!user) { return done(null, false); }
@@ -105,6 +110,12 @@ passport.deserializeUser(function(user, done){
     done(null, user);
 });
 
+module.exports.saveUser = function(userObj, callback){
+    orm.addUserToDB(userObj, function(status, err){
+        if (err) return callback(false);
+        callback(true);
+    });
+};
 
 module.exports = function(app){
 

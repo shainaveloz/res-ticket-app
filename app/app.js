@@ -1,7 +1,5 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var module = require('./public/js/app.module.js');
-var routes = require('./public/js/app.routes.js');
 var config = require('./public/js/app.config.js');
 var connection = require('./config/connection.js');
 var secret = require('./app-secret.js');
@@ -43,6 +41,30 @@ app.use(passport.session());
 
 app.get('/', function(req,res){
     res.sendFile(path.join(__dirname, './views', 'mainIndex.html'));
+});
+
+app.get('/chef', function(req,res){
+    res.sendFile(path.join(__dirname, './views', 'chefs.html'));
+});
+
+app.get('/expo', function(req,res){
+    res.sendFile(path.join(__dirname, './views', 'expo.html'));
+});
+
+app.get('/fry', function(req,res){
+    res.sendFile(path.join(__dirname, './views', 'fry.html'));
+});
+
+app.get('/pantry', function(req,res){
+    res.sendFile(path.join(__dirname, './views', 'pantry.html'));
+});
+
+app.get('/prep', function(req,res){
+    res.sendFile(path.join(__dirname, './views', 'prep.html'));
+});
+
+app.get('/servers', function(req,res){
+    res.sendFile(path.join(__dirname, './views', 'servers.html'));
 });
 
 app.get('/login', function(req,res){
