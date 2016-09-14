@@ -54,34 +54,34 @@
                 <li><a class="white-text" ui-sref="index">Home</a></li>
             </ul>
         </div>
-        <div class="col l3 s12">
+        <div class="col l3 s12" ng-controller="buttonData">
             <h5 class="white-text">Drinks</h5>
             <ul>
-                <li><button class="white-text" ng-controller="buttonData" ng-repeat="button">Drinks</button></li>
+                <li><button class="white-text">Drinks</button></li>
             </ul>
         </div>
-        <div class="col l3 s12">
+        <div class="col l3 s12" ng-controller="buttonData">
             <h5 class="white-text">Entrees</h5>
             <ul>
-                <li><button class="white-text" ng-controller="buttonData" >Entrees</button>{{inputEntree}}</li>
+                <li><button class="white-text">Entrees</button></li>
             </ul>
         </div>
         <div class="col l3 s12">
             <h5 class="white-text">Appetizers</h5>
             <ul>
-                <li><button class="white-text" ng-repeat="button">Appetizers</button></li>
+                <li><button class="white-text">Appetizers</button></li>
             </ul>
         </div>
         <div class="col l3 s12">
             <h5 class="white-text">Desserts</h5>
             <ul>
-                <li><button class="white-text" ng-repeat="button">Desserts</button></li>
+                <li><button class="white-text">Desserts</button></li>
             </ul>
         </div>
         <div class="col l3 s12">
             <h5 class="white-text">Orders In</h5>
             <ul>
-                <li><button class="white-text" ng-repeat="button">Orders In</button></li>
+                <li><button class="white-text">Orders In</button></li>
             </ul>
         </div>
 
@@ -135,6 +135,8 @@
 
 <script src="../bower_components/angular/angular.js"></script>
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="../components/moment.js"></script>
+<script src="../components/angular-moment.js"></script>
 <script src="../public/js/index.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/materialize.js"></script>

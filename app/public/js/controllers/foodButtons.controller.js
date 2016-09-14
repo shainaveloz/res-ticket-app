@@ -1,6 +1,6 @@
 'use strict';
 
-function(){
+(function(){
 
     angular
         .controller('ticketApp', foodButtonData);
@@ -18,4 +18,4 @@ function(){
 
     }
 
-}
+})();

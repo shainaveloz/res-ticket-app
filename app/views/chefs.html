@@ -55,7 +55,7 @@
                     <h2 class="center brown-text"><i class="material-icons">note</i></h2>
                     <h5 class="center">Orders In</h5>
                 </div>
-                <button ng-repeat="buttons"></button>
+                <button>{{ date | amStartOf:'second' | amLocal }}</button>
             </div>
 
             <div class="col s12 m4">
@@ -100,6 +100,8 @@
 
 <script src="../bower_components/angular/angular.js"></script>
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="../public/js/components/moment.js"></script>
+<script src="../public/js/components/angular-moment.js"></script>
 <script src="../public/js/index.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/materialize.js"></script>

@@ -1,13 +1,13 @@
 'use strict';
 
-function(){
+(function(){
 
     angular
-        .controller('ticketApp', timeData);
+        .module('moment')
+        .controller('ticketApp', amStartOf);
 
-    function timeData(CONST){
-        if (click === foodButtonData){
-            moment().fromNow();
-        }
+    function amStartOf(){
+        moment().startOf('second');
     }
-}
+
+})();

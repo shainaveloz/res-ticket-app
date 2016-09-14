@@ -41,7 +41,7 @@
                     url: "/login",
                     templateUrl: "../views/login.html",
                     controller: function($scope){
-                        $scope.UserService();
+                        $scope.loginCtrl();
                     }
                 })
                 .state('auth', {

@@ -6,14 +6,13 @@
 
     angular
         .module('ticketApp')
-        .constant('toastr', toastr)
-        .constant('moment', moment)
+        .constant('moment', require('moment-timezone'))
         .constant('CONST', {
             inputEntreeData:{
                 'burgerButton': 'Burger',
                 'shepardButton': 'Shepards Pie',
                 'chickSanButton': 'Chicken Sandwich'
-        })
+        }})
         .constant('CONST', {
             inputCheeseData:{
                 'cheddarButton': 'Cheddar',
@@ -48,7 +47,6 @@
                 'iceCreamButton': 'Ice cream',
                 'brownieButton': 'Brownie'
             }
-        })
+        });
 
-})
 })();
