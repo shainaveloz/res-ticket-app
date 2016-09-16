@@ -28,10 +28,7 @@
                 })
                 .state('server', {
                     url: "/server",
-                    templateUrl: "../views/server.html",
-                    controller: function($scope){
-                        $scope.buttonData = button;
-                    }
+                    templateUrl: "../views/server.html"
                 })
                 .state('prep', {
                     url: "/prep",
@@ -40,9 +37,7 @@
                 .state('login', {
                     url: "/login",
                     templateUrl: "../views/login.html",
-                    controller: function($scope){
-                        $scope.loginCtrl();
-                    }
+                    controller: 'moment'
                 })
                 .state('auth', {
                 url: "/auth/google",
@@ -51,6 +46,11 @@
                 .state('logout', {
                     url:"/logout",
                     templateUrl:"../views/mainIndex.html"
+                })
+                .state('orders', {
+                    url: '/orders',
+                    templateUrl: '../views/orders.html',
+                    controller: 'OrdersCtrl'
                 });
         });
 })();

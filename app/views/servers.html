@@ -101,6 +101,8 @@
                 <p class="light"></p>
             </div>
         </div>
+
+        <button ng-repeat="button in data.buttons" class="btn" ng-class="button.class" ng-click="button.click($event)">{{button.text}}</button>
     </div>
 </div>
 
@@ -135,8 +137,8 @@
 
 <script src="../bower_components/angular/angular.js"></script>
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="../components/moment.js"></script>
-<script src="../components/angular-moment.js"></script>
+<script src="../public/js/components/moment.js"></script>
+<script src="../public/js/components/angular-moment.js"></script>
 <script src="../public/js/index.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/materialize.js"></script>

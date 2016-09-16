@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <meta name="google-signin-client_id" content="932569619900-24714d0s0kddfcs5hebhnl6tj2qv87rc.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="GOOGLE_CLIENT_ID.apps.googleusercontent.com">
     <title>Res Ticket</title>
 
     <!-- CSS  -->
@@ -12,7 +12,7 @@
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body ui-view>
-    <div class="row" ng-controller="userService">
+    <div class="row" ng-controller="googleService">
         <form class="col s12" novalidate class="simple-form">
             <div class="row">
                 <div class="input-field col s6">
@@ -36,8 +36,9 @@
                     <label for="password">Password</label>
                 </div>
             </div>
-            <div class="g-signin2" data-onsuccess="onSignIn" ng-click="loginCtrl"></div>
+            <button data-onsuccess="onSignIn" ng-click="loginCtrl">Sign In</button>
         </form>
+        <div class="g-signin2" data-onsuccess="onSignIn" ng-click="loginCtrl"></div>
     </div>
 
     <footer class="page-footer teal">
@@ -68,6 +69,7 @@
 
 <script src="../bower_components/angular/angular.js"></script>
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="../app-secret.js"></script>
 <script src="../public/js/components/platform.js" async defer></script>
 <script src="../public/js/index.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

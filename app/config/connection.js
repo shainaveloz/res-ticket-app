@@ -5,12 +5,12 @@ var orm = require('./orm.js');
 var mysql = require('mysql');
 var secret = ('./app-secret.js');
 
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'tickets_app'
-});
+// var connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '',
+//     database: 'tickets_app'
+// });
 
 connection.connect(function(err) {
     if (err) {
@@ -21,8 +21,8 @@ connection.connect(function(err) {
 });
 
 
-var GOOGLE_CLIENT_ID = '932569619900-24714d0s0kddfcs5hebhnl6tj2qv87rc.apps.googleusercontent.com';
-var GOOGLE_CLIENT_SECRET = '0A8iooj3l2wMKx3Iv__NvYVv';
+// var GOOGLE_CLIENT_ID = '932569619900-24714d0s0kddfcs5hebhnl6tj2qv87rc.apps.googleusercontent.com';
+// var GOOGLE_CLIENT_SECRET = '0A8iooj3l2wMKx3Iv__NvYVv';
 
 passport.use(new GoogleStrategy({
         clientID: GOOGLE_CLIENT_ID,

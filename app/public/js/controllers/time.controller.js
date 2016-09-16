@@ -3,8 +3,8 @@
 (function(){
 
     angular
-        .module('moment')
-        .controller('ticketApp', amStartOf);
+        .module('ticketApp')
+        .controller('moment', amStartOf);
 
     function amStartOf(){
         moment().startOf('second');
