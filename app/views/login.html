@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
     <meta name="google-signin-client_id" content="GOOGLE_CLIENT_ID.apps.googleusercontent.com">
-    <title>Res Ticket</title>
+    <title>Hot Ticket</title>
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -12,33 +12,54 @@
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body ui-view>
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="#" class="brand-logo">Hot Ticket</a>
+        </div>
+    </nav>
+
+    <div id="index-banner" class="parallax-container">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <br><br>
+                <h1 class="header center teal-text text-lighten-2">Welcome!</h1>
+                <div class="row center">
+                    <h5 class="header col s12 darken-4">If you already have a Google Account, please sign in with your Gmail! If not then please register through our system.</h5>
+                </div>
+
+            </div>
+        </div>
+        <div class="parallax"><img src="res-3.jpg" alt="Unsplashed background img 1"></div>
+    </div>
+
     <div class="row" ng-controller="googleService">
-        <form class="col s12" novalidate class="simple-form">
+        <ngpassport-form class="col s12" novalidate class="simple-form">
             <div class="row">
                 <div class="input-field col s6">
-                    <input placeholder="Placeholder" id="first_name" type="text" class="validate" ng-model="user.first">
+                    <input placeholder="Placeholder" id="first_name" type="text" class="validate" ng-init="first_name='John'" ng-model="username">
                     <label for="first_name">First Name</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="last_name" type="text" class="validate" ng-model="user.last">
+                    <input id="last_name" type="text" class="validate"  ng-init="last_name='Hudson'" ng-model="user.last">
                     <label for="last_name">Last Name</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="email" type="email" class="validate" ng-model="user.email">
+                    <input id="email" type="email" class="validate" ng-init="email='test@test.com'" ng-model="user.email">
                     <label for="email">Email</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="password" type="password" class="validate">
+                    <input id="password" type="password" class="validate" ng-init="password='test'" ng-model="password">
                     <label for="password">Password</label>
                 </div>
             </div>
-            <button data-onsuccess="onSignIn" ng-click="loginCtrl">Sign In</button>
-        </form>
-        <div class="g-signin2" data-onsuccess="onSignIn" ng-click="loginCtrl"></div>
+            <input type="button" value="Sign In" class="btn btn-success" ng-click="loginCtrl"></input>
+            <div class="g-signin2" data-onsuccess="onSignIn" ng-click="loginCtrl"></div>
+            <p class="alert alert-danger" ng-if="errMsg">{{errMsg}}</p>
+        </ngpassport-form>
     </div>
 
     <footer class="page-footer teal">
@@ -60,12 +81,12 @@
         </div>
         <div class="footer-copyright">
             <div class="container">
-                Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Shaina Veloz</a>
+                Made by <a class="brown-text text-lighten-3">Shaina Veloz</a>
             </div>
         </div>
     </footer>
 
-
+    <ui-view></ui-view>
 
 <script src="../bower_components/angular/angular.js"></script>
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>

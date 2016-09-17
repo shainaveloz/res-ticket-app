@@ -32,14 +32,8 @@
             // Attach orders
             if($scope.orders) {
                 $scope.order.date = new Date($scope.dish.date.getTime());
-                $scope.order._items.push({ amount: $scope.dish.amount, _item: $scope.dish._article._id });
+                $scope.order._items.push({ amount: $scope.dish.amount, _item: $scope.dish._order._id });
             }
-
-            for(var i in $scope.snacks)
-                $scope.order._items.push({amount: $scope.snacks[i].amount, _item: $scope.snacks[i]._id });
-
-
-
 
 
             // Form
@@ -54,7 +48,7 @@
                     if(!Auth.isLoggedIn())
                         delete objRequest._user;
 
-                    // Atach date
+                    // Attach time
                     objRequest.date = new Date($scope.selectedDate.date.getTime());
                     objRequest.time = objRequest.time.replace('.', ':');
 
@@ -62,7 +56,7 @@
 
                         console.log(order);
                         var header = 'Order booked!';
-                        var msg = '<p>Your order has been booked successfully!! Come and pick up your meal: </p>' +
+                        var msg = '<p>Your order has been booked successfully!!</p>' +
                             '<h4 class="text-center">' + $scope.selectedDate.str + ' at ' + order.time;
 
                         UIHandler.DialogConfirm(header, msg, 'success', {backdrop: 'static', callback: $scope.redirect});

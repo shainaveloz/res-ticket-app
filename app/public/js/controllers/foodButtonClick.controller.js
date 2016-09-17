@@ -5,10 +5,10 @@
         .module('ticketApp')
         .controller('foodButtonClickController', ['$scope', function($scope){
             $scope.order = function(){
-                if(foodButton == false){
-                    $scope.showHide = function(){
-                        $scope.IsVisible = $scope.IsVisible ? false : true;
-                    }
+                    this.selected.favoriteDessert = dessert;
+                    this._mdPanelRef && this._mdPanelRef.close().then(function() {
+                        angular.element(document.querySelector('.demo-menu-open-button')).focus();
+
                 }
             }
         }]);
