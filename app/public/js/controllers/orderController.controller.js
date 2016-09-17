@@ -5,7 +5,7 @@
         .module('ticketApp')
         .controller('OrdersCtrl', function ($scope, $state, $filter, $http, moment, Auth, Config, UIHandler) {
 
-            var now = new Date();
+            var Time = new Date();
             var today = new Date(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
 
             // Order data

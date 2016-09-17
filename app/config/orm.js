@@ -1,7 +1,8 @@
 'use strict';
 
-var connection = require('../config/connection.js');
+var connection = require('./connection.js');
 var _ = require('lodash');
+var User = require('../public/js/controllers/user.controller');
 
 var orm = {
 
@@ -85,37 +86,35 @@ var Order = ({
     date: Date,
     time: String,
     name: String,
-    _user: { type: user_id, ref: 'User' },
+    _user: { type: user._id, ref: 'User' },
     readed: { type: Boolean, default: false },
     created_at: { type: Date, default: Date.now }
 });
 
 
 // Creates a new order in the DB.
-exports.create = function(req, res) {
-
-    var OrderLine = ({
-        _item: { type: orders_id, ref: 'Order' }
-    });
-
-    OrderLine.create(req.body._items, function(err){
-        if(err) { return handleError(res, err); }
-        var _lines = [];
-        for (var i = 1; i < arguments.length; i++)
-            _lines.push(arguments[i]._id);
-
-        var _order = req.body;
-        _order._items = _lines;
-
-        Order.create(_order, function(err, order) {
-            if(err) { return handleError(res, err); }
-
-            return res.json(201, order);
-        });
-    });
-
-
-};
+// exports.create = function(req, res) {
+//
+//     var OrderLine = ({
+//         _item: { type: orders_id, ref: 'Order' }
+//     });
+//
+//     OrderLine.create(req.body._items, function(err){
+//         if(err) { return handleError(res, err); }
+//         var _lines = [];
+//         for (var i = 1; i < arguments.length; i++)
+//             _lines.push(arguments[i]._id);
+//
+//         var _order = req.body;
+//         _order._items = _lines;
+//
+//         Order.create(_order, function(err, order) {
+//             if(err) { return handleError(res, err); }
+//
+//             return res.json(201, order);
+//         });
+//     });
+// };
 
 // Updates an existing order in the DB.
 // exports.update = function(req, res) {
@@ -141,17 +140,24 @@ exports.create = function(req, res) {
 // };
 
 // Deletes a order from the DB.
-exports.destroy = function(req, res) {
-    Order.findById(req.params.id, function (err, order) {
-        if(err) { return handleError(res, err); }
-        if(!order) { return res.send(404); }
-        order.remove(function(err) {
-            if(err) { return handleError(res, err); }
-            return res.send(204);
+ function deleteOrder (order) {
+    return new Promise(function (resolve, reject) {
+        Order.findById(req.params.id, function (err, order) {
+            if (err) {
+                return handleError(res, err);
+            }
+            if (!order) {
+                return res.send(404);
+            }
+            order.remove(function (err) {
+                if (err) {
+                    return handleError(res, err);
+                }
+                return res.send(204);
+            });
         });
     });
-};
-
+}
 function handleError(res, err) {
     return res.send(500, err);
 }

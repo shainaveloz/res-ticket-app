@@ -10,6 +10,10 @@ CREATE TABLE users (
 	UNIQUE KEY `username` (`username`)
 );
 
+ALTER TABLE users ADD email varchar(100) NOT NULL;
+ALTER TABLE users ADD first_name varchar(100) NOT NULL;
+ALTER TABLE users ADD last_name varchar(100) NOT NULL;
+
 CREATE TABLE entrees(
 	id int NOT NULL AUTO_INCREMENT,
 	entree_name BOOLEAN NOT NULL,
@@ -60,6 +64,11 @@ CREATE TABLE orders(
 	FOREIGN KEY (dessert_id) REFERENCES desserts(id),
 	PRIMARY KEY (id)
 );
+
+ALTER TABLE orders ADD user_id int NOT NULL;
+ALTER TABLE orders ADD FOREIGN KEY (user_id) REFERENCES users(id);
+
+ALTER TABLE users ADD time varchar(100) NOT NULL;
 
 SET GLOBAL event_scheduler = ON;
 

@@ -1,4 +1,4 @@
-'use strict';
+
 
 module.exports = {
 
@@ -12,6 +12,6 @@ module.exports = {
         database: 'tickets_app'
     });
 
-};
+}
 
 

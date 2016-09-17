@@ -1,7 +1,7 @@
 'use strict';
 
 var passport = require('passport');
-var config = require('../../config/environment');
+var config = require('../server/config/environment');
 var jwt = require('jsonwebtoken');
 
 var validationError = function(res, err) {

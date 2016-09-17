@@ -16,8 +16,6 @@ angular
 
                 if(returnObj.allOrders[i].date.getTime() == today.getTime())
                     returnObj.todayOrders.push(returnObj.allOrders[i]);
-                else if(returnObj.allOrders[i].date.getTime() == tomorrow.getTime())
-                    returnObj.tomorrowOrders.push(returnObj.allOrders[i]);
             }
         };
 
@@ -25,21 +23,14 @@ angular
         var socketsCallback = function(event, item){
             if(event == 'created'){
                 if(item.date.getTime() == today.getTime())
-                    returnObj.todayOrders.push(item);
-                else if(item.date.getTime() == tomorrow.getTime())
-                    returnObj.tomorrowOrders.push(item);
+                    returnObj.todayOrders.push(item)
             }
             else{
                 var itemInToday = _.find(returnObj.todayOrders, {_id: item._id});
-                var itemInTomorrow = _.find(returnObj.tomorrowOrders, {_id: item._id});
 
                 if(itemInToday){
                     var index = returnObj.todayOrders.indexOf(itemInToday);
                     returnObj.todayOrders.splice(index, 1, item);
-                }
-                else if(itemInTomorrow){
-                    var index = returnObj.tomorrowOrders.indexOf(itemInTomorrow);
-                    returnObj.tomorrowOrders.splice(index, 1, item);
                 }
             }
         };
@@ -48,7 +39,6 @@ angular
 
             allOrders: [],
             todayOrders: [],
-            tomorrowOrders: [],
             prom: null,
             loaded: false,
 
@@ -74,7 +64,6 @@ angular
             cleanOrders: function(){
                 returnObj.allOrders = [];
                 returnObj.todayOrders = [];
-                returnObj.tomorrowOrders = [];
             }
         };
 

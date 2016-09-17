@@ -5,14 +5,15 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 var orm = require('./orm.js');
 var mysql = require('mysql');
-var secret = ('./app-secret.js');
+var secret = require ('./app-secret.js');
+var User = require ('../public/js/user.controller.js');
 //
-// var connection = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: '',
-//     database: 'tickets_app'
-// });
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'tickets_app'
+});
 
 connection.connect(function(err) {
     if (err) {

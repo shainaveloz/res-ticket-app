@@ -14,24 +14,22 @@
                 <tbody>
                 <tr ng-show="dish" class="dish-row">
                     <td><i class="fa fa-cutlery"></i></td>
-                    <td>{{dish._entree.title}}</td>
+                    <td>{{dish.title}}</td>
                     <td>{{time}}</td>
                 </tr>
                 </tbody>
             </table>
-
-            <h4 class="total">Total: {{order.amount}} €</h4>
         </div>
     </div>
     <div class="row">
         <div class="col s12 m7">
-            <div class="card" ng-show="dish">
+            <div class="card" ng-show="dish" ng-repeat="">
                 <div class="card-image">
                     <img src="./notepad.png">
                     <span class="card-title">Order</span>
                 </div>
                 <div class="card-content">
-                    <p>{{}}</p>
+                    <p>{{orders}}</p>
                 </div>
             </div>
         </div>
