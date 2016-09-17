@@ -4,6 +4,7 @@ var config = require('./public/js/app.config.js');
 var connection = require('./config/connection.js');
 var secret = require('./app-secret.js');
 var path = require('path');
+var _ = require('lodash');
 var passport = require('passport');
 var session  = require('express-session');
 var cookieParser = require('cookie-parser');

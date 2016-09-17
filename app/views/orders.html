@@ -1,0 +1,75 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Your order</h3>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-show="dish" class="dish-row">
+                    <td><i class="fa fa-cutlery"></i></td>
+                    <td>{{dish._entree.title}}</td>
+                    <td>{{time}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h4 class="total">Total: {{order.amount}} €</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m7">
+            <div class="card" ng-show="dish">
+                <div class="card-image">
+                    <img src="./notepad.png">
+                    <span class="card-title">Order</span>
+                </div>
+                <div class="card-content">
+                    <p>{{}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <h3>Complete your order</h3>
+
+            <form class="form" name="form" ng-submit="PerformOrder(form)" novalidate>
+
+                <div class="form-group" ng-class="{ 'has-error' : form.name.$invalid && submitted }">
+                    <label>Name</label>
+                    <input ng-disabled="loggedIn" type="text" name="name" class="form-control" ng-model="order.name"
+                           ng-required="{{!loggedIn}}"/>
+
+                    <p class="help-block" ng-show="form.name.$invalid && submitted">
+                        Please, enter your name.
+                    </p>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error' : form.date.$invalid && submitted }">
+                    <label>Date</label>
+                    <a ng-show="dish" class="date-help" href="#" tooltip-placement="right" tooltip="As you ordered a main dish, the date is taken from the dish date">
+                        <i class="glyphicon glyphicon-question-sign"></i>
+                    </a>
+                    <select class="form-control" ng-options="date.str for date in dates" ng-model="selectedDate"
+                            ng-disabled="dish" type="text" name="date" required></select>
+
+                    <p class="help-block" ng-show="form.date.$invalid && submitted">
+                        Please, enter a date.
+                    </p>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Book Order</button>
+            </form>
+        </div>
+    </div>
+
+</div>

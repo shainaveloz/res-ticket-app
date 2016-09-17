@@ -4,23 +4,21 @@
 
     angular
         .module('ticketApp')
-        .controller('buttonController', function($scope, config){
-
-            import inject from 'ng-inject';
+        .controller('buttonController', function($scope, CONST){
 
             // decorator takes a list of angular dependency names:
-            @inject('$scope', 'config')
-            class buttonControllerr {
+            $scope.range = function(n){
+                var array = [];
+                for(var i = 0 ; i < n ; i++)
+                    array.push(i);
+                return array;
+            };
 
-                constructor() {
-                    // both `$scope` and `config` are injected via DI:
-                    this.$scope.config = ;
-                }
+            $scope.buttonType = ['CONST'];
 
-                otherMethod() {
-                    this.$scope.value = 1;
-                }
+            $scope.updateButtons = function() {
 
+                $scope.buttons.splice($scope.numOfButtons, $scope.buttons.length);
             }
         })
     }

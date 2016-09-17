@@ -12,7 +12,6 @@
             $scope.order = {
                 date: new Date(),
                 time: '',
-                amount: 0,
                 _user: null,
                 name: '',
                 _items: []
@@ -67,18 +66,12 @@
                 }
             };
 
-            $scope.redirect = function(){
-                ArticlesSvc.resetSelection();
-                $state.go('articles');
-            };
-
 
             //times
             $scope.times = [];
 
             $scope.times.push({ str: 'Today, ' + $filter('date')(today, 'EEEE dd'), time: new Time(today.getTime())});
             today.setDate(today.getDate() + 1);
-            $scope.dates.push({ str: 'Tomorrow, ' + $filter('date')(today, 'EEEE dd'), date: new Date(today.getTime()) });
 
             for(var i=0; i < Config.itemsToDisplay - 2; i++){
                 today.setDate(today.getDate() + 1);
