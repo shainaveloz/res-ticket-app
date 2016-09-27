@@ -3,6 +3,7 @@
 var User = require('./user.controller');
 var passport = require('passport');
 //var config = require('../config/connection.js');
+var orm = require('../config/orm.js');
 var jwt = require('jsonwebtoken');
 
 var validationError = function(res, err) {
@@ -38,7 +39,7 @@ exports.create = function (req, res, next) {
 /**
  * Get a single user
  */
-exports.show = function (req, res, next) {
+exports.orm = function (req, res, next) {
     var userId = req.params.id;
 
     User.findById(userId, function (err, user) {

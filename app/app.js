@@ -4,7 +4,7 @@ var config = require('./public/js/app.config.js');
 var connection = require('./config/connection.js');
 var secret = require('./app-secret.js');
 var path = require('path');
-var io = require('socket.io')(server);
+var fs = require('fs');
 var _ = require('lodash');
 var passport = require('passport');
 var session  = require('express-session');
@@ -40,9 +40,28 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-var server = require('http').createServer(app);
-io.on('connection', function(){});
-server.listen(8080);
+var io = require('socket.io')(app);
+function handler (req, res) {
+    fs.readFile(__dirname + '/orders.html',
+        function (err, data) {
+            if (err) {
+                res.writeHead(500);
+                return res.end('Error loading orders.html');
+            }
+
+            res.writeHead(200);
+            res.end(data);
+        });
+}
+
+    io.on('connection', function (socket) {
+    socket.emit('news', {hello: 'world'});
+    socket.on('orders', function (data) {
+        console.log(data);
+    });
+});
+
+
 
 app.get('/', function(req,res){
     res.sendFile(path.join(__dirname, './views', 'mainIndex.html'));
