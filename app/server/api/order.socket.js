@@ -1,6 +1,6 @@
 'use strict';
 
-var Order = require('../public/orders.service.js');
+var Order = require('../public/js/services/orders.service.js');
 var socket = require('./app.js');
 
 exports.register = function(socket) {

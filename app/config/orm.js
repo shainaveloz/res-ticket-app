@@ -1,15 +1,12 @@
 'use strict';
 
 var connection = require('./connection.js');
-var _ = require('lodash');
-var User = require('../public/js/controllers/user.controller');
-
+var User = require('../server/api/user.js');
 
 var orm = {
 
     viewAll: function (table) {
         return new Promise(function (resolve, reject) {
-            //may need to do A.ID instead of A.Key format, 'SELECT * FROM ' + table + ' A LEFT JOIN skills B ON A.ID = B.ID'
             var queryString = 'SELECT * FROM ' + table + ' A LEFT JOIN scores B ON A.id = B.id';
             connection.query(queryString, function (err, result) {
                 resolve(result);
@@ -31,10 +28,10 @@ var orm = {
     },
 
      Order : function (){
-        var query = ' What is your order?'
+        var query = ' What is your order?';
         connection.query(query, {order: answer.orders}, function(err, res) {
         for (var i = 0; i < res.length; i++) {
-            console.log("Apps: " + res[i].app_name + " || Entree: " + res[i].entree_name + " || Dessert: " + res[i].dessert_name + "|| Salad: " + res[i].salad_name + "||fry: "+ res.[i].fry_name);
+            console.log("Apps: " + res.app_name + " || Entree: " + res.entree_name + " || Dessert: " + res.dessert_name + "|| Salad: " + res.salad_name + "||fry: "+ res.fry_name);
         }
     })},
 
@@ -101,3 +98,5 @@ deleteOrder: function(order) {
         });
     }
 };
+
+module.exports = orm;

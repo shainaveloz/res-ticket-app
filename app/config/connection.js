@@ -5,38 +5,37 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 var orm = require('./orm.js');
 var mysql = require('mysql');
-var secret = require ('./app-secret.js');
-var User = require ('../public/js/user.controller.js');
-//
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'tickets_app'
-});
+var User = require ('./server/api/user.js');
+var secret = require('./server/environment/app-secret.js');
 
-connection.connect(function(err) {
-    if (err) {
-        console.error('error connecting: ' + err.stack);
-        return;
-    }
-    console.log('connected as id ' + connection.threadId);
-});
+exports.setup = function(connection, secret){
+     connection = mysql.createConnection({
+        host: secret.connection.host,
+        user: secret.connection.user,
+        password: secret.connection.password,
+        database: secret.connection.database
+    });
+    connection.connect(function(err) {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        }
+        console.log('connected as id ' + connection.threadId);
+    });
+};
 
-
-// var GOOGLE_CLIENT_ID = '932569619900-24714d0s0kddfcs5hebhnl6tj2qv87rc.apps.googleusercontent.com';
-// var GOOGLE_CLIENT_SECRET = '0A8iooj3l2wMKx3Iv__NvYVv';
-
-passport.use(new GoogleStrategy({
-        clientID: GOOGLE_CLIENT_ID,
-        clientSecret: GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:8080/auth/google/callback"
-    },
-    function(accessToken, refreshToken, profile, done) {
-        User.findOrCreate({ googleId: profile.id }, function (err, user) {
-            return done(err, user);
-        });
-}));
+exports.setup = function (User, secret) {
+    passport.use(new GoogleStrategy({
+            clientID: secret.google.clientID,
+            clientSecret: secret.google.clientSecret,
+            callbackURL: secret.google.callbackURL
+        },
+        function (accessToken, refreshToken, profile, done) {
+            User.findOrCreate({googleId: profile.id}, function (err, user) {
+                return done(err, user);
+            });
+        }));
+};
 
 function Strategy(options, verify) {
     if (typeof options == 'function') {
@@ -137,5 +136,3 @@ module.exports = function(app){
     );
 
 };
-
-module.exports = connection;

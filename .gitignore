@@ -1,3 +1,4 @@
-node_modules, bower_components
-/app/app-secret.js
+node_modules
+bower_components
+/app/server/environment/app-secret.js
 /.idea/

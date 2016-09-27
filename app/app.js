@@ -1,11 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var config = require('./public/js/app.config.js');
 var connection = require('./config/connection.js');
-var secret = require('./app-secret.js');
 var path = require('path');
 var fs = require('fs');
-var _ = require('lodash');
+var secret = require('./server/environment/app-secret');
 var passport = require('passport');
 var session  = require('express-session');
 var cookieParser = require('cookie-parser');
@@ -28,7 +26,7 @@ app.use(bodyParser.json({type:'application/vnd.api+json'}));
 app.use(cookieParser());
 // session configuration
 app.use(session({
-    secret: 'resticket',
+    secret: secret.session.secret,
     cookie: { maxAge: 100000 },
     resave: true,
     saveUninitialized: true,
