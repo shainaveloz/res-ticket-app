@@ -8,6 +8,7 @@ var validationError = function(res, err) {
     return res.json(422, err);
 };
 
+
 var User = {
     first_name: String,
     last_name:String,
@@ -83,7 +84,7 @@ exports.create = function (req, res, next) {
     newUser.role = 'user';
     newUser.save(function(err, user) {
         if (err) return validationError(res, err);
-        var token = jwt.sign({_id: user._id }, secrets.session.secret , { expiresInMinutes: 60*5 });
+        var token = jwt.sign({_id: user._id }, secret.session.secret , { expiresInMinutes: 60*5 });
         res.json({ token: token });
     });
 };
@@ -166,3 +167,5 @@ exports.me = function(req, res, next) {
 exports.authCallback = function(req, res, next) {
     res.redirect('/');
 };
+
+module.exports = User;

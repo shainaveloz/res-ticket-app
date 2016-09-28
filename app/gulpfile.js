@@ -43,7 +43,7 @@ gulp.task('test', ['lint', 'style', 'unittest']);
 gulp.task('default', ['test']);
 
 gulp.task('watch', function() {
-    return gulp.watch(['./mainIndex.html','./partials/*.html', './styles/*.*css', './js/**/*.js'], ['build']);
+    return gulp.watch(['./views/mainIndex.html', './views/chefs.html','./views/prep.html','./views/login.html','./views/expo.html','./views/fry.html','./views/orders.html','./views/pantry.html','./styles/*.*css', './js/**/*.js'], ['build']);
 
     module.exports= function(gulp){
         gulp.task('test', function () {

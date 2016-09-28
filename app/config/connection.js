@@ -5,8 +5,8 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 var orm = require('./orm.js');
 var mysql = require('mysql');
-var User = require ('./server/api/user.js');
-var secret = require('./server/environment/app-secret.js');
+var User = require ('../server/api/user.js');
+var secret = require('../server/environment/app-secret.js');
 
 exports.setup = function(connection, secret){
      connection = mysql.createConnection({

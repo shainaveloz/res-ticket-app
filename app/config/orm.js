@@ -1,7 +1,7 @@
 'use strict';
 
 var connection = require('./connection.js');
-var User = require('../server/api/user.js');
+
 
 var orm = {
 
