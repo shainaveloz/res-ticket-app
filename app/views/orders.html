@@ -54,7 +54,7 @@
 
                 <div class="form-group" ng-class="{ 'has-error' : form.date.$invalid && submitted }">
                     <label>Date</label>
-                    <a ng-show="dish" class="date-help" href="#" tooltip-placement="right" tooltip="As you ordered a main dish, the date is taken from the dish date">
+                    <a ng-show="dish" class="date-help"  tooltip-placement="right" tooltip="As you ordered a main dish, the date is taken from the dish date">
                         <i class="glyphicon glyphicon-question-sign"></i>
                     </a>
                     <select class="form-control" ng-options="date.str for date in dates" ng-model="selectedDate"

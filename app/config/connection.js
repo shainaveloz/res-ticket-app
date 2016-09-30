@@ -85,8 +85,8 @@ Strategy.prototype.authenticate = function(req, options) {
 passport.use(new LocalStrategy(
     function(username, password, done) {
         function User(userObj) {
-            this.username = userObj.username
-            this.password = bcrypt.hashSync(userObj.password, null, null)
+            this.username = userObj.username;
+            this.password = bcrypt.hashSync(userObj.password, null, null);
         }
         User.findOne({ username: username }, function (err, user) {
             if (err) { return done(err); }

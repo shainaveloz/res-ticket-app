@@ -12,26 +12,26 @@
             $scope.order = {
                 date: new Date(),
                 time: '',
-                _user: null,
+                username: null,
                 name: '',
-                _items: []
+                items: []
             };
 
             $scope.loggedIn = Auth.isLoggedIn();
             if($scope.loggedIn) {
-                $scope.order._user = angular.copy(Auth.getCurrentUser());
-                $scope.order.name = $scope.order._user.name;
+                $scope.order.username = angular.copy(Auth.getCurrentUser());
+                $scope.order.name = $scope.order.username.name;
             }
 
 
             // Attach user
             if(Auth.isLoggedIn())
-                $scope.order._user = Auth.getCurrentUser()._id;
+                $scope.order.username = Auth.getCurrentUser()._id;
 
             // Attach orders
             if($scope.orders) {
                 $scope.order.date = new Date($scope.dish.date.getTime());
-                $scope.order._items.push({ amount: $scope.dish.amount, _item: $scope.dish._order._id });
+                $scope.order.items.push({ amount: $scope.dish.amount, item: $scope.dish.order._id });
             }
 
 
@@ -45,7 +45,7 @@
                     var objRequest = angular.copy($scope.order);
 
                     if(!Auth.isLoggedIn())
-                        delete objRequest._user;
+                        delete objRequest.username;
 
                     // Attach time
                     objRequest.date = new Date($scope.selectedDate.date.getTime());

@@ -38,13 +38,12 @@ angular
         var returnObj =  {
 
             allOrders: [],
-            todayOrders: [],
             prom: null,
             loaded: false,
 
             loadOrders: function(){
                 Auth.isLoggedInAsync(function(loggedIn) {
-                    if(loggedIn && Auth.isManager()){
+                    if(loggedIn && Auth.isChef()){
                         if(!returnObj.prom || returnObj.prom.$$state.status === 0 || returnObj.allOrders.length === 0) {
                             returnObj.prom = $http.get('/api/orders/');
                             returnObj.prom.success(function (orders) {
@@ -71,6 +70,6 @@ angular
 
         returnObj.loadOrders();
 
-        return returnObj
+        return returnObj;
 
     });
