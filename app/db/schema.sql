@@ -68,7 +68,7 @@ CREATE TABLE orders(
 ALTER TABLE orders ADD user_id int NOT NULL;
 ALTER TABLE orders ADD FOREIGN KEY (user_id) REFERENCES users(id);
 
-ALTER TABLE users ADD time varchar(100) NOT NULL;
+ALTER TABLE orders ADD time varchar(100) NOT NULL;
 
 SET GLOBAL event_scheduler = ON;
 

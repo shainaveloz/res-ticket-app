@@ -20,7 +20,7 @@ var User = {
     hashedPassword: String,
     provider: String,
     salt: String,
-    google: {},
+    google: {}
 }
 
 
