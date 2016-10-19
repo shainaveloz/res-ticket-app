@@ -20,7 +20,30 @@ var User = {
     hashedPassword: String,
     provider: String,
     salt: String,
-    google: {}
+    google: {
+        email: String,
+        email_verified: true,
+        name: String,
+        given_name: String,
+        family_name: String,
+        picture: String,
+        gender: String,
+        locale: String,
+        clientID: String
+        updated_at: String,
+        user_id: String
+        nickname: String,
+        identities: [
+            {
+                provider: "google-oauth2",
+                user_id: String,
+                connection: "google-oauth2",
+                isSocial: true
+            }
+        ],
+        created_at: String,
+        sub: String
+    }
 }
 
 

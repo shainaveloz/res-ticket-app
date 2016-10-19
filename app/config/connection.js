@@ -3,6 +3,7 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var LocalStrategy = require('passport-local').Strategy;
+var Auth0Strategy = require('passport-auth0');
 var orm = require('./orm.js');
 var mysql = require('mysql');
 var User = require ('../server/api/user.js');
@@ -22,7 +23,32 @@ exports.setup = function(connection, secret){
         }
         console.log('connected as id ' + connection.threadId);
     });
-};
+    function login(email, password, callback) {
+        connection.connect();
+
+        var query = "SELECT id, nickname, email, password " +
+            "FROM users WHERE email = ?";
+
+        connection.query(query, [email], function (err, results) {
+            if (err) return callback(err);
+            if (results.length === 0) return callback(new WrongUsernameOrPasswordError(email));
+            var user = results[0];
+
+            bcrypt.compare(password, user.password, function (err, isValid) {
+                if (err) {
+                    callback(err);
+                } else if (!isValid) {
+                    callback(new WrongUsernameOrPasswordError(email));
+                } else {
+                    callback({
+                        id: user.id.toString(),
+                        nickname: user.nickname,
+                        email: user.email
+                    });
+                }
+            });
+        });
+}
 
 exports.setup = function (User, secret) {
     passport.use(new GoogleStrategy({
@@ -36,6 +62,29 @@ exports.setup = function (User, secret) {
             });
         }));
 };
+
+exports.setup = function (User, secret){
+    var strategy = new Auth0Strategy({
+        domain:       process.env.AUTH0_DOMAIN,
+        clientID:     process.env.AUTH0_CLIENT_ID,
+        clientSecret: process.env.AUTH0_CLIENT_SECRET,
+        callbackURL:  process.env.AUTH0_CALLBACK_URL
+    }, function(accessToken, refreshToken, extraParams, profile, done) {
+        // accessToken is the token to call Auth0 API (not needed in the most cases)
+        // extraParams.id_token has the JSON Web Token
+        // profile has all the information from the user
+
+        function signinDb() {
+            auth0.signin({
+                connection: 'Username-Password-Authentication',
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value,
+            });
+        return done(null, profile);
+    });
+
+    passport.use(strategy);
+}
 
 function Strategy(options, verify) {
     if (typeof options == 'function') {
