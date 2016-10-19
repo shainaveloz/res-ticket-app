@@ -142,7 +142,7 @@ exports.verify = function (email, callback) {
 
 }
 
-function changePassword (email, newPassword, callback) {
+exports.changePassword = function (email, newPassword, callback) {
     var query = "UPDATE users SET password = ? WHERE email = ? ";
 
     bcrypt.hash(newPassword, 10, function (err, hash) {
@@ -157,6 +157,19 @@ function changePassword (email, newPassword, callback) {
     });
 }
 
+exports.getByEmail = function (name, callback) {
+    var profile = {
+        user_id:     "103547991597142817347",
+        nickname:    "johnfoo",
+        email:       "johnfoo@gmail.com",
+        name:        "John Foo",
+        given_name:  "John",
+        family_name: "Foo"
+    };
+
+    callback(null, profile);
+}
+
 exports.remove = function (id, callback) {
 
     var query = 'DELETE FROM users WHERE id = ?';
@@ -168,30 +181,6 @@ exports.remove = function (id, callback) {
 
 }
 
-/**
- * Get list of users
- * restriction: 'admin'
- */
-exports.index = function(req, res) {
-    User.find({}, '-salt -hashedPassword', function (err, users) {
-        if(err) return res.send(500, err);
-        res.json(200, users);
-    });
-};
-
-
-exports.changeName = function(req, res, next) {
-    var userId = req.user._id;
-    var name = String(req.body.name);
-
-    User.findById(userId, function (err, user) {
-        user.name = name;
-        user.save(function(err) {
-            if (err) return validationError(res, err);
-            res.send(200);
-        });
-    });
-};
 
 /**
  * Get my info
