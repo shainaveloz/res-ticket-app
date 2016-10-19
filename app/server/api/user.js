@@ -3,11 +3,11 @@
 var passport = require('passport');
 var secret = require('../environment/app-secret.js');
 var jwt = require('jsonwebtoken');
+var connection = require('../config/connection.js');
 
 var validationError = function(res, err) {
     return res.json(422, err);
 };
-
 
 var User = {
     first_name: String,
@@ -45,7 +45,6 @@ var User = {
         sub: String
     }
 }
-
 
 User.create({
         name: 'Test User',
@@ -86,6 +85,89 @@ User.create({
         console.log('finished populating users');
     }
 );
+
+exports.login = function (email, password, callback){
+    var query = "SELECT id, nickname, email, password " +
+        "FROM users WHERE email = ?";
+
+    connection.query(query, [email], function (err, results) {
+        if (err) return callback(err);
+        if (results.length === 0) return callback(new WrongUsernameOrPasswordError(email));
+        var user = results[0];
+
+        bcrypt.compare(password, user.password, function (err, isValid) {
+            if (err) {
+                callback(err);
+            } else if (!isValid) {
+                callback(new WrongUsernameOrPasswordError(email));
+            } else {
+                callback({
+                    id: user.id.toString(),
+                    nickname: user.nickname,
+                    email: user.email
+                });
+            }
+        });
+}
+
+exports.create = function (user, callback) {
+    var query = "INSERT INTO users SET ?";
+
+    bcrypt.hash(user.password, 10, function (err, hash) {
+        if (err) {
+            return callback(err);
+        }
+        var insert = {
+            password: hash,
+            email: user.email
+        };
+        connection.query(query, insert, function (err, results) {
+            if (err) return callback(err);
+            if (results.length === 0) return callback();
+            callback(null);
+        });
+    });
+}
+
+exports.verify = function (email, callback) {
+
+    var query = "UPDATE users SET email_Verified = true WHERE email_Verified = false AND email = ? ";
+
+    connection.query(query, email, function (err, results) {
+        if (err) return callback(err);
+        if (results.length === 0) return callback();
+
+        callback(null, results.length > 0);
+    });
+
+}
+
+function changePassword (email, newPassword, callback) {
+    var query = "UPDATE users SET password = ? WHERE email = ? ";
+
+    bcrypt.hash(newPassword, 10, function (err, hash) {
+        if (err) {
+            callback(err);
+        } else {
+            connection.query(query, hash, email, function (err, results) {
+                if (err) return callback(err);
+                callback(null, results.length > 0);
+            });
+        }
+    });
+}
+
+exports.remove = function (id, callback) {
+
+    var query = 'DELETE FROM users WHERE id = ?';
+
+    connection.query(query, [id], function (err) {
+        if (err) return callback(err);
+        callback(null);
+    });
+
+}
+
 /**
  * Get list of users
  * restriction: 'admin'
@@ -97,65 +179,6 @@ exports.index = function(req, res) {
     });
 };
 
-
-/**
- * Creates a new user
- */
-exports.create = function (req, res, next) {
-    //noinspection JSUnresolvedFunction
-    var newUser = new User(req.body);
-    newUser.role = 'user';
-    newUser.save(function(err, user) {
-        if (err) return validationError(res, err);
-        var token = jwt.sign({_id: user._id }, secret.session.secret , { expiresInMinutes: 60*5 });
-        res.json({ token: token });
-    });
-};
-
-/**
- * Get a single user
- */
-exports.show = function (req, res, next) {
-    var userId = req.params.id;
-
-    User.findById(userId, function (err, user) {
-        if (err) return next(err);
-        if (!user) return res.send(401);
-        res.json(user.profile);
-    });
-};
-
-/**
- * Deletes a user
- * restriction: 'admin'
- */
-exports.destroy = function(req, res) {
-    User.findByIdAndRemove(req.params.id, function(err, user) {
-        if(err) return res.send(500, err);
-        return res.send(204);
-    });
-};
-
-/**
- * Change a users password
- */
-exports.changePassword = function(req, res, next) {
-    var userId = req.user._id;
-    var oldPass = String(req.body.oldPassword);
-    var newPass = String(req.body.newPassword);
-
-    User.findById(userId, function (err, user) {
-        if(user.authenticate(oldPass)) {
-            user.password = newPass;
-            user.save(function(err) {
-                if (err) return validationError(res, err);
-                res.send(200);
-            });
-        } else {
-            res.send(403);
-        }
-    });
-};
 
 exports.changeName = function(req, res, next) {
     var userId = req.user._id;
