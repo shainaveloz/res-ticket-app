@@ -77,26 +77,26 @@ var orm = {
         });
     },
 
-// Deletes a order from the DB.
-deleteOrder: function(order) {
-    return new Promise(function (resolve, reject) {
-        Orders.findById(req.params.id, function (err, order) {
-            if (err) {
-                return handleError(res, err);
-            }
-            if (!order) {
-                return res.send(404);
-            }
-            connection.query("DELETE FROM orders WHERE ?", {
-                entree_id: "",
-                app_id:"",
-                salad_id:"",
-                frys_id:"",
-                dessert_id:""
-            }, function(err, res) {});
+    // Deletes a order from the DB.
+    deleteOrder: function(order) {
+        return new Promise(function (resolve, reject) {
+            Orders.findById(req.params.id, function (err, order) {
+                if (err) {
+                    return handleError(res, err);
+                }
+                if (!order) {
+                    return res.send(404);
+                }
+                connection.query("DELETE FROM orders WHERE ?", {
+                    entree_id: "",
+                    app_id:"",
+                    salad_id:"",
+                    frys_id:"",
+                    dessert_id:""
+                }, function(err, res) {});
+                });
             });
-        });
-    }
-};
+        }
+    };
 
 module.exports = orm;

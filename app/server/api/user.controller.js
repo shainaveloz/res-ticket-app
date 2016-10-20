@@ -3,6 +3,45 @@
 var User = require('../server/api/user.js');
 var orm = require('../config/orm.js');
 var jwt = require('jsonwebtoken');
+var secret = require('../environment/app-secret');
+
+// sign with default (HMAC SHA256)
+var token = jwt.sign({ algorithm: 'HS256' }, 'shhhhh');
+//backdate a jwt 30 seconds
+var older_token = jwt.sign({ foo: 'bar', iat: Math.floor(Date.now() / 1000) - 30 }, 'shhhhh');
+
+var cert = fs.readFileSync('public.pem');  // get public key
+jwt.verify(token, cert, { audience: 'urn:foo', issuer: 'urn:issuer', jwtid: 'jwtid', subject: 'subject' }, function(err, decoded) {
+    // if subject mismatch, err == invalid subject
+});
+// sign asynchronously
+jwt.sign({ foo: 'bar' }, cert, { algorithm: 'RS256' }, function(err, token) {
+    console.log(token);
+});
+
+var payload = {
+    "sub": "1234567890",
+    "name": "John Doe",
+    "admin": true
+};
+
+// encode
+jwt.encode(secret, payload, function (err, token) {
+    if (err) {
+        return console.error(err.name, err.message);
+    } else {
+        console.log(token);
+
+        // decode
+        jwt.decode(secret, token, function (err_, decode) {
+            if (err) {
+                return console.error(err.name, err.message);
+            } else {
+                console.log(decode);
+            }
+        });
+    }
+});
 
 var validationError = function(res, err) {
     return res.json(422, err);
@@ -29,7 +68,7 @@ exports.create = function (req, res, next) {
     newUser.role = 'user';
     newUser.save(function(err, user) {
         if (err) return validationError(res, err);
-        var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+        var token = jwt.sign({id: user.id }, session.secret, { expiresInMinutes: 60*5 });
         res.json({ token: token });
     });
 };

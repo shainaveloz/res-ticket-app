@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var connection = require('./config/connection.js');
+var jwt = require('express-jwt');
 var path = require('path');
 var fs = require('fs');
 var secret = require('./server/environment/app-secret');

@@ -2,12 +2,7 @@
 
 var passport = require('passport');
 var secret = require('../environment/app-secret.js');
-var jwt = require('jsonwebtoken');
 var connection = require('../config/connection.js');
-
-var validationError = function(res, err) {
-    return res.json(422, err);
-};
 
 var User = {
     first_name: String,
@@ -108,7 +103,7 @@ exports.login = function (email, password, callback){
                 });
             }
         });
-}
+};
 
 exports.create = function (user, callback) {
     var query = "INSERT INTO users SET ?";
@@ -127,7 +122,7 @@ exports.create = function (user, callback) {
             callback(null);
         });
     });
-}
+};
 
 exports.verify = function (email, callback) {
 
@@ -140,7 +135,7 @@ exports.verify = function (email, callback) {
         callback(null, results.length > 0);
     });
 
-}
+};
 
 exports.changePassword = function (email, newPassword, callback) {
     var query = "UPDATE users SET password = ? WHERE email = ? ";
@@ -155,7 +150,7 @@ exports.changePassword = function (email, newPassword, callback) {
             });
         }
     });
-}
+};
 
 exports.getByEmail = function (name, callback) {
     var profile = {
@@ -168,7 +163,7 @@ exports.getByEmail = function (name, callback) {
     };
 
     callback(null, profile);
-}
+};
 
 exports.remove = function (id, callback) {
 
@@ -179,28 +174,13 @@ exports.remove = function (id, callback) {
         callback(null);
     });
 
-}
-
-
-/**
- * Get my info
- */
-exports.me = function(req, res, next) {
-    var userId = req.user._id;
-    User.findOne({
-        _id: userId
-    }, '-salt -hashedPassword', function(err, user) {
-        if (err) return next(err);
-        if (!user) return res.json(401);
-        res.json(user);
-    });
 };
 
 /**
  * Authentication callback
  */
 exports.authCallback = function(req, res, next) {
-    res.redirect('/');
+    res.redirect('/auth/callback');
 };
 
 module.exports = User;

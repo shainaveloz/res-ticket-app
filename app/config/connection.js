@@ -53,7 +53,7 @@ exports.setup = function (User, secret){
             auth0.signin({
                 connection: 'Username-Password-Authentication',
                 username: document.getElementById('username').value,
-                password: document.getElementById('password').value,
+                password: document.getElementById('password').value
             });
         return done(null, profile);
     });
@@ -128,6 +128,16 @@ passport.use(new LocalStrategy({
     session: false
 }));
 
+passport.authenticate('bearer', function(err, user, info) {
+    if (err) return next(err);
+    if (user) {
+        req.user = user;
+        return next();
+    } else {
+        return res.status(401).json({ status: 'error', code: 'unauthorized' });
+    }
+})(req, res, next);
+
 passport.serializeUser(function(user, done){
     done(null, user);
 });
@@ -153,10 +163,31 @@ module.exports = function(app){
         function(req, res) {
             res.redirect('/');
         });
+
+    app.get('/message', function(req, res) {
+        return res.json({
+            status: 'ok',
+            message: 'Congratulations ' + req.user.username + '. You have a token.'
+        });
+    });
+
+    // Error handler middleware
+    app.use(function(err, req, res, next) {
+        console.error(err);
+        return res.status(500).json({ status: 'error', code: 'unauthorized' });
+    });
+
     app.post('/login',
         passport.authenticate('local', { successRedirect: '/',
             failureRedirect: '/login',
-            failureFlash: true })
-    );
+            failureFlash: true },
+            function (err, user, info) {
+                if (err) return next(err);
+                if (!user) {
+                    return res.status(401).json({ status: 'error', code: 'unauthorized' });
+                } else {
+                    return res.json({ token: jwt.sign({id: user.id}, secret) });
+                })(req, res, next);
+    })
 
 };
